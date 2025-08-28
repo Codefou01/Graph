@@ -1,0 +1,52 @@
+// Java Code : 
+
+class Solution {
+    public void apdfs(ArrayList<ArrayList<Integer>> adj, int i, boolean[] visited, ArrayList<Integer>  ans){
+        if(visited[i]) return ;
+        ans.add(i);
+        visited[i] = true;
+        for(int j : adj.get(i)){
+            apdfs(adj,j,visited,ans);
+        }
+    }
+
+    public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj) {
+        // Code here
+        int n = adj.size();
+        boolean[] visited = new boolean[n];
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            if(!visited[i]){
+                apdfs(adj,i,visited,ans);
+            }
+        }
+        return ans;
+    }
+}
+
+
+
+// C++ Code :
+
+class Solution {
+  public:
+    void dfsUtil(int node, vector<vector<int>>& adj, vector<int>& vis, vector<int>& res) {
+        vis[node] = 1;
+        res.push_back(node);
+        
+        for (int neigh : adj[node]) {
+            if (!vis[neigh]) {
+                dfsUtil(neigh, adj, vis, res);
+            }
+        }
+    }
+    
+    vector<int> dfs(vector<vector<int>>& adj) {
+        int V = adj.size();
+        vector<int> res;
+        vector<int> vis(V, 0);
+        dfsUtil(0, adj, vis, res);
+        
+        return res;
+    }
+};
